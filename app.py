@@ -724,7 +724,7 @@ def location_deals_page():
     
     if st.session_state.location_deals_state == 'input':
         # Location input form
-        st.markdown("#### 📍 Find Deals by Location")
+        st.markdown("##### 📍 Find Deals by Location")
         st.markdown("<span style='font-size: 10px; color: #6b7280;'>Enter location (state) and/or pincode to find deals near you.</span>", unsafe_allow_html=True)
         
         # Use Streamlit's text_input for visible text color
@@ -828,8 +828,26 @@ def category_deals_page():
             with col_next:
                 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-    # No extra spacing here, deal cards start immediately after header/pagination
-    if st.session_state.category_deals_state == 'results':
+    # Category selection or results display
+    if st.session_state.category_deals_state == 'select':
+        # Category selection interface
+        st.markdown("##### 🎯 Browse Deals by Category")
+        st.markdown("Select a category to view available deals.")
+        
+        categories = list(deals_data.keys())
+        selected_category = st.selectbox("Choose Category", categories, key="category_select")
+        
+        if st.button("🔍", key="view_category_deals"):
+            if selected_category:
+                category_deals = deals_data.get(selected_category, [])
+                st.session_state.selected_category = selected_category
+                st.session_state.category_deals = category_deals
+                st.session_state.current_page = 0
+                st.session_state.category_deals_state = 'results'
+                st.rerun()
+    
+    elif st.session_state.category_deals_state == 'results':
+        # Display results
         deals = st.session_state.category_deals
         current_page = st.session_state.current_page
         deals_per_page = 5
@@ -946,10 +964,10 @@ def login_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # App header - Professional Wells Fargo style (centered)
+    # App header - Professional Fargo Deal Bot style (centered)
     st.markdown("""
     <div style="text-align: center; padding: 25px 20px 15px;">
-        <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #1f2937; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;">DEALSBOT</h1>
+        <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #1f2937; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;">FARGO DEAL BOT</h1>
         <p style="font-size: 20px; color: #6b7280; font-weight: 400; margin-bottom: 35px; line-height: 1.3;">""" + greeting + """</p>
     </div>
     """, unsafe_allow_html=True)
@@ -1061,12 +1079,12 @@ def chat_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # Header with title and logout
+    # Header with Fargo Deal Bot title and logout
     col1, col2 = st.columns([4, 1])
     with col1:
         st.markdown("""
-        <div style="max-width: 150px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 6px 15px; color: white; border-radius: 8px;">
-            <h6 style="margin: 0; color: white; font-size: 14px;">DealsBot</h6>
+        <div style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); padding: 6px 15px; color: #3730a3; border-radius: 8px; border: 1px solid #c7d2fe; display: inline-block;">
+            <h6 style="margin: 0; color: #3730a3; font-size: 14px; font-weight: 600;">Fargo Deal Bot</h6>
         </div>
         """, unsafe_allow_html=True)
     
@@ -1118,15 +1136,30 @@ def chat_page():
             <style>
             .stButton > button {
                 height: 48px !important;
-                padding: 12px 20px !important;
-                margin: 6px 0 !important;
-                text-align: left !important;
-                justify-content: flex-start !important;
+                background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
+                color: #3730a3 !important;
+                border: none !important;
+                border-radius: 8px !important;
+                font-size: 14px !important;
+                font-weight: 600 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2) !important;
+                transition: all 0.2s ease !important;
+                margin: 8px 0 !important;
                 width: 100% !important;
+                text-align: left !important;
+                padding-left: 20px !important;
+            }
+            .stButton > button:hover {
+                transform: translateY(-1px) !important;
+                box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+                background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%) !important;
             }
             </style>
             """, unsafe_allow_html=True)
             
+            # Always show all QRB buttons with functionality
             if st.button("🎯 Personalized Deals", key="personalized_btn"):
                 st.session_state.selected_action = "personalized"
                 st.session_state.current_page = 0
