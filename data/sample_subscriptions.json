@@ -1,0 +1,42 @@
+[
+  {
+    "user_id": "U001",
+    "subscribed_deals": "1005,2002,4002,6002"
+  },
+  {
+    "user_id": "U002",
+    "subscribed_deals": "1001,2001,3001,5001,6001,7001"
+  },
+  {
+    "user_id": "U003",
+    "subscribed_deals": "1002,3004,4004,6004"
+  },
+  {
+    "user_id": "U004",
+    "subscribed_deals": "2005,4003,5005,6005,7005"
+  },
+  {
+    "user_id": "U005",
+    "subscribed_deals": "1003,2003,3002,4001"
+  },
+  {
+    "user_id": "U006",
+    "subscribed_deals": "1004,5002,6003,7003"
+  },
+  {
+    "user_id": "U007",
+    "subscribed_deals": "2004,3005,4005"
+  },
+  {
+    "user_id": "U008",
+    "subscribed_deals": "3003,4003,5003,6003"
+  },
+  {
+    "user_id": "U009",
+    "subscribed_deals": "1001,2001,7004"
+  },
+  {
+    "user_id": "U010",
+    "subscribed_deals": "5004,6005,7002"
+  }
+]
