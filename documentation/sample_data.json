@@ -1,0 +1,562 @@
+{
+  "deals": {
+    "travel": [
+      {
+        "deal_id": 1001,
+        "category": "travel",
+        "description": "Weekend Gateway Package - 30% off on 2-night stays at luxury resorts. Use code TRAVEL001 at Luxury Escapes",
+        "start_date": "2024-01-15",
+        "end_date": "2024-03-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$150"
+      },
+      {
+        "deal_id": 1002,
+        "category": "travel",
+        "description": "Short Term Stay - 25% discount on vacation rentals for 3+ days. Use code TRAVEL002 at VacationRentals.com",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-15",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 1003,
+        "category": "travel",
+        "description": "Mountain Retreat - 40% off on cabin bookings in Colorado. Use code TRAVEL003 at Mountain Cabins Co",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-30",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$300"
+      },
+      {
+        "deal_id": 1004,
+        "category": "travel",
+        "description": "Beach Getaway - 35% savings on coastal hotel bookings. Use code TRAVEL004 at Beach Resorts Inc",
+        "start_date": "2024-01-25",
+        "end_date": "2024-06-30",
+        "location_state": "Hawaii",
+        "location_pincode": "96815",
+        "amount_saved": "$250"
+      },
+      {
+        "deal_id": 1005,
+        "category": "travel",
+        "description": "City Break - 20% off on urban hotel stays in major cities. Use code TRAVEL005 at Urban Hotels",
+        "start_date": "2024-02-10",
+        "end_date": "2024-04-30",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$120"
+      }
+    ],
+    "entertainment": [
+      {
+        "deal_id": 2001,
+        "category": "entertainment",
+        "description": "Movie Tickets - 50% off on all movie theater tickets. Use code ENTERTAIN001 at Cinema Plus",
+        "start_date": "2024-01-15",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$15"
+      },
+      {
+        "deal_id": 2002,
+        "category": "entertainment",
+        "description": "Restaurant Dining - 30% discount on fine dining experiences. Use code ENTERTAIN002 at Fine Dining Group",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$60"
+      },
+      {
+        "deal_id": 2003,
+        "category": "entertainment",
+        "description": "Family Day Out - 40% off on amusement park tickets. Use code ENTERTAIN003 at Amusement Parks",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-30",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$80"
+      },
+      {
+        "deal_id": 2004,
+        "category": "entertainment",
+        "description": "Children's Amusement - 35% discount on kids entertainment centers. Use code ENTERTAIN004 at Kids Entertainment",
+        "start_date": "2024-03-01",
+        "end_date": "2024-08-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$45"
+      },
+      {
+        "deal_id": 2005,
+        "category": "entertainment",
+        "description": "Concert Tickets - 25% off on live music performances. Use code ENTERTAIN005 at Concert Tickets Pro",
+        "start_date": "2024-02-15",
+        "end_date": "2024-07-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$75"
+      }
+    ],
+    "health": [
+      {
+        "deal_id": 3001,
+        "category": "health",
+        "description": "Comprehensive Health Check-up - 40% off on full body screening. Use code HEALTH001 at HealthFirst Clinics",
+        "start_date": "2024-01-15",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 3002,
+        "category": "health",
+        "description": "Fitness Equipment - 30% discount on home gym equipment. Use code HEALTH002 at Fitness Pro",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-31",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$300"
+      },
+      {
+        "deal_id": 3003,
+        "category": "health",
+        "description": "Smart Watch - 25% off on fitness and health wearables. Use code HEALTH003 at TechHealth",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-30",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$150"
+      },
+      {
+        "deal_id": 3004,
+        "category": "health",
+        "description": "Wellness Spa Package - 35% discount on massage and therapy sessions. Use code HEALTH004 at Wellness Centers",
+        "start_date": "2024-02-15",
+        "end_date": "2024-07-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$180"
+      },
+      {
+        "deal_id": 3005,
+        "category": "health",
+        "description": "Dental Check-up - 30% off on cleaning and examination. Use code HEALTH005 at Dental Care Plus",
+        "start_date": "2024-03-01",
+        "end_date": "2024-08-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$120"
+      }
+    ],
+    "events": [
+      {
+        "deal_id": 4001,
+        "category": "events",
+        "description": "NBA Finals Tickets - 25% off on premium seating for championship games. Use code EVENT001 at Sports Tickets Pro",
+        "start_date": "2024-05-01",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90015",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 4002,
+        "category": "events",
+        "description": "Taylor Swift Concert - 30% discount on VIP packages. Use code EVENT002 at Concert Masters",
+        "start_date": "2024-03-15",
+        "end_date": "2024-08-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$350"
+      },
+      {
+        "deal_id": 4003,
+        "category": "events",
+        "description": "Broadway Show - 40% off on premium theater tickets. Use code EVENT003 at Broadway Tickets",
+        "start_date": "2024-02-01",
+        "end_date": "2024-07-31",
+        "location_state": "New York",
+        "location_pincode": "10036",
+        "amount_saved": "$180"
+      },
+      {
+        "deal_id": 4004,
+        "category": "events",
+        "description": "Book Fair - 50% discount on entry passes and book purchases. Use code EVENT004 at Literary Events",
+        "start_date": "2024-04-01",
+        "end_date": "2024-04-30",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$75"
+      },
+      {
+        "deal_id": 4005,
+        "category": "events",
+        "description": "Comic Con - 35% off on weekend passes and merchandise. Use code EVENT005 at Comic Con International",
+        "start_date": "2024-06-01",
+        "end_date": "2024-07-31",
+        "location_state": "California",
+        "location_pincode": "92101",
+        "amount_saved": "$120"
+      }
+    ],
+    "financial": [
+      {
+        "deal_id": 5001,
+        "category": "financial",
+        "description": "Home Loan - 0.5% lower interest rate on mortgage applications. Use code FINANCE001 at Home Loan Bank",
+        "start_date": "2024-01-15",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$5000"
+      },
+      {
+        "deal_id": 5002,
+        "category": "financial",
+        "description": "Credit Card - 0% APR for 18 months on balance transfers. Use code FINANCE002 at Credit Union Plus",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$300"
+      },
+      {
+        "deal_id": 5003,
+        "category": "financial",
+        "description": "Personal Loan - 2% lower interest rate for existing customers. Use code FINANCE003 at Personal Finance Co",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-30",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$800"
+      },
+      {
+        "deal_id": 5004,
+        "category": "financial",
+        "description": "New Account Bonus - $300 cash bonus for opening checking account. Use code FINANCE004 at Community Bank",
+        "start_date": "2024-03-01",
+        "end_date": "2024-08-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$300"
+      },
+      {
+        "deal_id": 5005,
+        "category": "financial",
+        "description": "Auto Loan - 1% lower interest rate on vehicle financing. Use code FINANCE005 at Auto Finance Bank",
+        "start_date": "2024-02-15",
+        "end_date": "2024-07-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$1200"
+      }
+    ],
+    "fashion": [
+      {
+        "deal_id": 6001,
+        "category": "fashion",
+        "description": "Designer Apparel - 40% off on premium clothing brands. Use code FASHION001 at Luxury Fashion House",
+        "start_date": "2024-01-15",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 6002,
+        "category": "fashion",
+        "description": "Cosmetics Collection - 30% discount on beauty products. Use code FASHION002 at Beauty Cosmetics",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$80"
+      },
+      {
+        "deal_id": 6003,
+        "category": "fashion",
+        "description": "Wedding Dress - 25% off on bridal gowns and accessories. Use code FASHION003 at Bridal Boutique",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-30",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$500"
+      },
+      {
+        "deal_id": 6004,
+        "category": "fashion",
+        "description": "Accessories - 35% discount on jewelry and handbags. Use code FASHION004 at Accessories World",
+        "start_date": "2024-03-01",
+        "end_date": "2024-08-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$150"
+      },
+      {
+        "deal_id": 6005,
+        "category": "fashion",
+        "description": "Athletic Wear - 30% off on sports and fitness clothing. Use code FASHION005 at Sports Fashion",
+        "start_date": "2024-02-15",
+        "end_date": "2024-07-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$120"
+      }
+    ],
+    "automotive": [
+      {
+        "deal_id": 7001,
+        "category": "automotive",
+        "description": "New Car Purchase - $3000 cashback on select models. Use code AUTO001 at Premium Auto Dealers",
+        "start_date": "2024-01-15",
+        "end_date": "2024-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$3000"
+      },
+      {
+        "deal_id": 7002,
+        "category": "automotive",
+        "description": "Motorcycle - 15% discount on all motorcycle models. Use code AUTO002 at Motorcycle World",
+        "start_date": "2024-02-01",
+        "end_date": "2024-05-31",
+        "location_state": "Texas",
+        "location_pincode": "78701",
+        "amount_saved": "$2500"
+      },
+      {
+        "deal_id": 7003,
+        "category": "automotive",
+        "description": "Car Accessories - 30% off on all automotive accessories. Use code AUTO003 at Auto Accessories Pro",
+        "start_date": "2024-01-20",
+        "end_date": "2024-04-30",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 7004,
+        "category": "automotive",
+        "description": "Tire Sale - 25% discount on premium tire brands. Use code AUTO004 at Tire Masters",
+        "start_date": "2024-03-01",
+        "end_date": "2024-08-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$400"
+      },
+      {
+        "deal_id": 7005,
+        "category": "automotive",
+        "description": "Car Maintenance - 20% off on service packages. Use code AUTO005 at Auto Service Center",
+        "start_date": "2024-02-15",
+        "end_date": "2024-07-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$150"
+      }
+    ]
+  },
+  "users": [
+    {
+      "user_id": "U001",
+      "user_name": "Sarah Johnson",
+      "user_location": "New York, NY",
+      "user_pincode": "10001",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": true,
+        "health": false,
+        "events": true,
+        "financial": false,
+        "fashion": true,
+        "automotive": false
+      }
+    },
+    {
+      "user_id": "U002",
+      "user_name": "Michael Chen",
+      "user_location": "Los Angeles, CA",
+      "user_pincode": "90210",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": true,
+        "health": true,
+        "events": false,
+        "financial": true,
+        "fashion": true,
+        "automotive": true
+      }
+    },
+    {
+      "user_id": "U003",
+      "user_name": "Emily Rodriguez",
+      "user_location": "Miami, FL",
+      "user_pincode": "33101",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": false,
+        "health": true,
+        "events": true,
+        "financial": false,
+        "fashion": true,
+        "automotive": false
+      }
+    },
+    {
+      "user_id": "U004",
+      "user_name": "David Thompson",
+      "user_location": "Chicago, IL",
+      "user_pincode": "60601",
+      "user_preferences": {
+        "travel": false,
+        "entertainment": true,
+        "health": false,
+        "events": true,
+        "financial": true,
+        "fashion": true,
+        "automotive": true
+      }
+    },
+    {
+      "user_id": "U005",
+      "user_name": "Jessica Williams",
+      "user_location": "Austin, TX",
+      "user_pincode": "78701",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": true,
+        "health": true,
+        "events": true,
+        "financial": false,
+        "fashion": false,
+        "automotive": false
+      }
+    },
+    {
+      "user_id": "U006",
+      "user_name": "Robert Kim",
+      "user_location": "Seattle, WA",
+      "user_pincode": "98101",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": false,
+        "health": false,
+        "events": false,
+        "financial": true,
+        "fashion": true,
+        "automotive": true
+      }
+    },
+    {
+      "user_id": "U007",
+      "user_name": "Amanda Davis",
+      "user_location": "Denver, CO",
+      "user_pincode": "80201",
+      "user_preferences": {
+        "travel": false,
+        "entertainment": true,
+        "health": true,
+        "events": true,
+        "financial": false,
+        "fashion": false,
+        "automotive": false
+      }
+    },
+    {
+      "user_id": "U008",
+      "user_name": "Christopher Lee",
+      "user_location": "Boston, MA",
+      "user_pincode": "02101",
+      "user_preferences": {
+        "travel": false,
+        "entertainment": false,
+        "health": true,
+        "events": true,
+        "financial": true,
+        "fashion": true,
+        "automotive": false
+      }
+    },
+    {
+      "user_id": "U009",
+      "user_name": "Nicole Brown",
+      "user_location": "Phoenix, AZ",
+      "user_pincode": "85001",
+      "user_preferences": {
+        "travel": true,
+        "entertainment": true,
+        "health": false,
+        "events": false,
+        "financial": false,
+        "fashion": false,
+        "automotive": true
+      }
+    },
+    {
+      "user_id": "U010",
+      "user_name": "Daniel Wilson",
+      "user_location": "Nashville, TN",
+      "user_pincode": "37201",
+      "user_preferences": {
+        "travel": false,
+        "entertainment": false,
+        "health": false,
+        "events": false,
+        "financial": true,
+        "fashion": true,
+        "automotive": true
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "user_id": "U001",
+      "subscribed_deals": "1005,2002,4002,6002"
+    },
+    {
+      "user_id": "U002",
+      "subscribed_deals": "1001,2001,3001,5001,6001,7001"
+    },
+    {
+      "user_id": "U003",
+      "subscribed_deals": "1002,3004,4004,6004"
+    },
+    {
+      "user_id": "U004",
+      "subscribed_deals": "2005,4003,5005,6005,7005"
+    },
+    {
+      "user_id": "U005",
+      "subscribed_deals": "1003,2003,3002,4001"
+    },
+    {
+      "user_id": "U006",
+      "subscribed_deals": "1004,5002,6003,7003"
+    },
+    {
+      "user_id": "U007",
+      "subscribed_deals": "2004,3005,4005"
+    },
+    {
+      "user_id": "U008",
+      "subscribed_deals": "3003,4003,5003,6003"
+    },
+    {
+      "user_id": "U009",
+      "subscribed_deals": "1001,2001,7004"
+    },
+    {
+      "user_id": "U010",
+      "subscribed_deals": "5004,6005,7002"
+    }
+  ]
+} 

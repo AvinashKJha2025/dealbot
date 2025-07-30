@@ -1,0 +1,368 @@
+{
+  "deals": {
+    "travel": [
+      {
+        "deal_id": 1001,
+        "category": "travel",
+        "description": "Weekend Gateway Package - 30% off on 2-night stays at luxury resorts. Use code TRAVEL001 at Luxury Escapes",
+        "start_date": "2025-01-15",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$150"
+      },
+      {
+        "deal_id": 1002,
+        "category": "travel",
+        "description": "Beach Resort Special - 25% discount on beachfront properties. Use code TRAVEL002 at Coastal Resorts",
+        "start_date": "2025-02-01",
+        "end_date": "2025-12-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 1003,
+        "category": "travel",
+        "description": "Mountain Adventure - 20% off on ski resort bookings. Use code TRAVEL003 at Mountain Getaways",
+        "start_date": "2025-01-20",
+        "end_date": "2025-12-31",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$180"
+      },
+      {
+        "deal_id": 1004,
+        "category": "travel",
+        "description": "Urban Explorer - 15% off on city hotel stays. Use code TRAVEL004 at Urban Hotels",
+        "start_date": "2025-02-10",
+        "end_date": "2025-12-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$120"
+      },
+      {
+        "deal_id": 1005,
+        "category": "travel",
+        "description": "City Break - 20% off on urban hotel stays in major cities. Use code TRAVEL005 at Urban Hotels",
+        "start_date": "2025-02-10",
+        "end_date": "2025-12-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$120"
+      }
+    ],
+    "entertainment": [
+      {
+        "deal_id": 2001,
+        "category": "entertainment",
+        "description": "Movie Night Special - Buy 2 tickets, get 1 free at AMC Theaters. Use code ENTERTAIN001",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$15"
+      },
+      {
+        "deal_id": 2002,
+        "category": "entertainment",
+        "description": "Restaurant Dining - 30% discount on fine dining experiences. Use code ENTERTAIN002 at Fine Dining Group",
+        "start_date": "2025-02-01",
+        "end_date": "2025-12-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$60"
+      },
+      {
+        "deal_id": 2003,
+        "category": "entertainment",
+        "description": "Theme Park Adventure - 25% off on Disney World tickets. Use code ENTERTAIN003",
+        "start_date": "2025-03-01",
+        "end_date": "2025-06-30",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$75"
+      },
+      {
+        "deal_id": 2004,
+        "category": "entertainment",
+        "description": "Concert Tickets - 20% off on live music events. Use code ENTERTAIN004 at Live Nation",
+        "start_date": "2025-02-15",
+        "end_date": "2025-07-31",
+        "location_state": "Texas",
+        "location_pincode": "75001",
+        "amount_saved": "$40"
+      },
+      {
+        "deal_id": 2005,
+        "category": "entertainment",
+        "description": "Bowling Night - 2 games for the price of 1. Use code ENTERTAIN005 at Strike Zone",
+        "start_date": "2025-01-10",
+        "end_date": "2025-12-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$25"
+      }
+    ],
+    "health": [
+      {
+        "deal_id": 3001,
+        "category": "health",
+        "description": "Gym Membership - 50% off first 3 months. Use code HEALTH001 at Fitness Plus",
+        "start_date": "2025-01-01",
+        "end_date": "2025-06-30",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$90"
+      },
+      {
+        "deal_id": 3002,
+        "category": "health",
+        "description": "Dental Checkup - 30% off comprehensive dental exam. Use code HEALTH002 at Smile Dental",
+        "start_date": "2025-02-01",
+        "end_date": "2025-12-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$75"
+      },
+      {
+        "deal_id": 3003,
+        "category": "health",
+        "description": "Yoga Classes - 20% off monthly unlimited pass. Use code HEALTH003 at Zen Yoga",
+        "start_date": "2025-01-15",
+        "end_date": "2025-12-31",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$40"
+      },
+      {
+        "deal_id": 3004,
+        "category": "health",
+        "description": "Massage Therapy - 25% off 60-minute sessions. Use code HEALTH004 at Relax Spa",
+        "start_date": "2025-02-10",
+        "end_date": "2025-06-30",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$50"
+      },
+      {
+        "deal_id": 3005,
+        "category": "health",
+        "description": "Nutrition Consultation - 40% off initial consultation. Use code HEALTH005 at Healthy Living",
+        "start_date": "2025-03-01",
+        "end_date": "2025-07-31",
+        "location_state": "Texas",
+        "location_pincode": "75001",
+        "amount_saved": "$80"
+      }
+    ],
+    "events": [
+      {
+        "deal_id": 4001,
+        "category": "events",
+        "description": "Sports Game - 30% off NBA tickets. Use code EVENTS001 at TicketMaster",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$45"
+      },
+      {
+        "deal_id": 4002,
+        "category": "events",
+        "description": "Comedy Show - 25% off stand-up comedy tickets. Use code EVENTS002 at Comedy Club",
+        "start_date": "2025-02-01",
+        "end_date": "2025-06-30",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$30"
+      },
+      {
+        "deal_id": 4003,
+        "category": "events",
+        "description": "Art Exhibition - Free admission to modern art museum. Use code EVENTS003 at Modern Art Gallery",
+        "start_date": "2025-01-15",
+        "end_date": "2025-12-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$20"
+      },
+      {
+        "deal_id": 4004,
+        "category": "events",
+        "description": "Music Festival - 20% off weekend passes. Use code EVENTS004 at Summer Fest",
+        "start_date": "2025-03-01",
+        "end_date": "2025-07-31",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$100"
+      },
+      {
+        "deal_id": 4005,
+        "category": "events",
+        "description": "Food Festival - 15% off food tasting tickets. Use code EVENTS005 at Taste of City",
+        "start_date": "2025-02-15",
+        "end_date": "2025-12-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$35"
+      }
+    ],
+    "financial": [
+      {
+        "deal_id": 5001,
+        "category": "financial",
+        "description": "Credit Card - 0% APR for 18 months on balance transfers. Use code FINANCIAL001 at Bank of America",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$5000"
+      },
+      {
+        "deal_id": 5002,
+        "category": "financial",
+        "description": "Personal Loan - Reduced interest rate of 5.99% APR. Use code FINANCIAL002 at Wells Fargo",
+        "start_date": "2025-02-01",
+        "end_date": "2025-08-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$2000"
+      },
+      {
+        "deal_id": 5003,
+        "category": "financial",
+        "description": "Investment Account - No trading fees for 90 days. Use code FINANCIAL003 at Charles Schwab",
+        "start_date": "2025-01-15",
+        "end_date": "2025-06-30",
+        "location_state": "Texas",
+        "location_pincode": "75001",
+        "amount_saved": "$300"
+      },
+      {
+        "deal_id": 5004,
+        "category": "financial",
+        "description": "Insurance Policy - 20% discount on auto insurance. Use code FINANCIAL004 at State Farm",
+        "start_date": "2025-02-10",
+        "end_date": "2025-07-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$400"
+      },
+      {
+        "deal_id": 5005,
+        "category": "financial",
+        "description": "Mortgage Refinance - 0.5% rate reduction. Use code FINANCIAL005 at Chase Bank",
+        "start_date": "2025-03-01",
+        "end_date": "2025-09-30",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$1500"
+      }
+    ],
+    "fashion": [
+      {
+        "deal_id": 6001,
+        "category": "fashion",
+        "description": "Designer Clothing - 40% off at Nordstrom. Use code FASHION001",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 6002,
+        "category": "fashion",
+        "description": "Shoe Collection - Buy 2, Get 1 Free at Nike. Use code FASHION002",
+        "start_date": "2025-02-01",
+        "end_date": "2025-12-31",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$120"
+      },
+      {
+        "deal_id": 6003,
+        "category": "fashion",
+        "description": "Accessories - 30% off jewelry and watches. Use code FASHION003 at Macy's",
+        "start_date": "2025-01-15",
+        "end_date": "2025-06-30",
+        "location_state": "Texas",
+        "location_pincode": "75001",
+        "amount_saved": "$150"
+      },
+      {
+        "deal_id": 6004,
+        "category": "fashion",
+        "description": "Beauty Products - 25% off cosmetics and skincare. Use code FASHION004 at Sephora",
+        "start_date": "2025-02-10",
+        "end_date": "2025-07-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$80"
+      },
+      {
+        "deal_id": 6005,
+        "category": "fashion",
+        "description": "Handbags - 35% off luxury handbags. Use code FASHION005 at Bloomingdale's",
+        "start_date": "2025-03-01",
+        "end_date": "2025-08-31",
+        "location_state": "Illinois",
+        "location_pincode": "60601",
+        "amount_saved": "$300"
+      }
+    ],
+    "automotive": [
+      {
+        "deal_id": 7001,
+        "category": "automotive",
+        "description": "Car Service - 20% off oil change and inspection. Use code AUTO001 at Jiffy Lube",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31",
+        "location_state": "California",
+        "location_pincode": "90210",
+        "amount_saved": "$40"
+      },
+      {
+        "deal_id": 7002,
+        "category": "automotive",
+        "description": "Tire Purchase - Buy 3, Get 1 Free at Discount Tires. Use code AUTO002",
+        "start_date": "2025-02-01",
+        "end_date": "2025-06-30",
+        "location_state": "New York",
+        "location_pincode": "10001",
+        "amount_saved": "$200"
+      },
+      {
+        "deal_id": 7003,
+        "category": "automotive",
+        "description": "Car Wash - Unlimited monthly car washes. Use code AUTO003 at Quick Wash",
+        "start_date": "2025-01-15",
+        "end_date": "2025-12-31",
+        "location_state": "Texas",
+        "location_pincode": "75001",
+        "amount_saved": "$60"
+      },
+      {
+        "deal_id": 7004,
+        "category": "automotive",
+        "description": "Auto Parts - 15% off all parts and accessories. Use code AUTO004 at AutoZone",
+        "start_date": "2025-02-10",
+        "end_date": "2025-07-31",
+        "location_state": "Florida",
+        "location_pincode": "33101",
+        "amount_saved": "$75"
+      },
+      {
+        "deal_id": 7005,
+        "category": "automotive",
+        "description": "Car Insurance - 10% discount on comprehensive coverage. Use code AUTO005 at Geico",
+        "start_date": "2025-03-01",
+        "end_date": "2025-08-31",
+        "location_state": "Colorado",
+        "location_pincode": "80202",
+        "amount_saved": "$120"
+      }
+    ]
+  }
+}

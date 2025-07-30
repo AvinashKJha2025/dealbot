@@ -1,0 +1,152 @@
+[
+  {
+    "user_id": "U001",
+    "user_name": "Sarah Johnson",
+    "user_location": "New York, NY",
+    "user_pincode": "10001",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": false,
+      "health": true,
+      "events": true,
+      "financial": false,
+      "fashion": true,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U002",
+    "user_name": "Michael Chen",
+    "user_location": "Los Angeles, CA",
+    "user_pincode": "90210",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": true,
+      "health": true,
+      "events": true,
+      "financial": true,
+      "fashion": true,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U003",
+    "user_name": "Emily Rodriguez",
+    "user_location": "Miami, FL",
+    "user_pincode": "33101",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": false,
+      "health": true,
+      "events": true,
+      "financial": false,
+      "fashion": true,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U004",
+    "user_name": "David Thompson",
+    "user_location": "Chicago, IL",
+    "user_pincode": "60601",
+    "user_preferences": {
+      "travel": false,
+      "entertainment": true,
+      "health": false,
+      "events": true,
+      "financial": true,
+      "fashion": false,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U005",
+    "user_name": "Lisa Wang",
+    "user_location": "Denver, CO",
+    "user_pincode": "80202",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": false,
+      "health": true,
+      "events": false,
+      "financial": false,
+      "fashion": true,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U006",
+    "user_name": "James Wilson",
+    "user_location": "Dallas, TX",
+    "user_pincode": "75001",
+    "user_preferences": {
+      "travel": false,
+      "entertainment": true,
+      "health": false,
+      "events": false,
+      "financial": true,
+      "fashion": true,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U007",
+    "user_name": "Maria Garcia",
+    "user_location": "Phoenix, AZ",
+    "user_pincode": "85001",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": true,
+      "health": true,
+      "events": false,
+      "financial": false,
+      "fashion": false,
+      "automotive": true
+    }
+  },
+  {
+    "user_id": "U008",
+    "user_name": "Robert Brown",
+    "user_location": "Seattle, WA",
+    "user_pincode": "98101",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": false,
+      "health": true,
+      "events": true,
+      "financial": true,
+      "fashion": false,
+      "automotive": false
+    }
+  },
+  {
+    "user_id": "U009",
+    "user_name": "Jennifer Davis",
+    "user_location": "Boston, MA",
+    "user_pincode": "02101",
+    "user_preferences": {
+      "travel": true,
+      "entertainment": true,
+      "health": false,
+      "events": true,
+      "financial": false,
+      "fashion": true,
+      "automotive": false
+    }
+  },
+  {
+    "user_id": "U010",
+    "user_name": "Christopher Lee",
+    "user_location": "San Francisco, CA",
+    "user_pincode": "94102",
+    "user_preferences": {
+      "travel": false,
+      "entertainment": true,
+      "health": true,
+      "events": false,
+      "financial": true,
+      "fashion": true,
+      "automotive": true
+    }
+  }
+]

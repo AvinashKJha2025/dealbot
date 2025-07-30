@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "deal-recommender-api-collection",
+		"name": "Deal Recommender API",
+		"description": "Complete API collection for testing the Deal Recommender Application. This collection includes all endpoints for user preferences, deal recommendations, subscriptions, and search functionality.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get User Preferences",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/preferences",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"preferences"
+							]
+						},
+						"description": "Retrieve user preferences for deal categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Preferences",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"preferences\": {\n    \"travel\": true,\n    \"entertainment\": false,\n    \"health\": true,\n    \"events\": true,\n    \"financial\": false,\n    \"fashion\": true,\n    \"automotive\": true\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/preferences",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"preferences"
+							]
+						},
+						"description": "Update user preferences for deal categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/U001",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"U001"
+							]
+						},
+						"description": "Get user profile information"
+					},
+					"response": []
+				}
+			],
+			"description": "User management endpoints for preferences and profiles"
+		},
+		{
+			"name": "Deal Recommendations",
+			"item": [
+				{
+					"name": "Get Recommended Deals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/recommended",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"recommended"
+							]
+						},
+						"description": "Get personalized deal recommendations based on user preferences and location"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recommended Deals with Location Filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"location_state\": \"New York\",\n  \"location_pincode\": \"10001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/recommended",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"recommended"
+							]
+						},
+						"description": "Get recommended deals with specific location filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Deals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"location_state\": \"California\",\n  \"location_pincode\": \"90210\",\n  \"category\": \"travel\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"search"
+							]
+						},
+						"description": "Search deals by location, pincode, and/or category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deals by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/category/travel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"category",
+								"travel"
+							]
+						},
+						"description": "Get all deals for a specific category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"categories"
+							]
+						},
+						"description": "Get all available deal categories"
+					},
+					"response": []
+				}
+			],
+			"description": "Deal recommendation and search endpoints"
+		},
+		{
+			"name": "Subscription Management",
+			"item": [
+				{
+					"name": "Subscribe to Deal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"deal_id\": 1005\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/subscribe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"subscribe"
+							]
+						},
+						"description": "Subscribe to a specific deal"
+					},
+					"response": []
+				},
+				{
+					"name": "Unsubscribe from Deal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"deal_id\": 1005\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/subscribe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"subscribe"
+							]
+						},
+						"description": "Unsubscribe from a specific deal"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subscribed Deals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/subscribed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"subscribed"
+							]
+						},
+						"description": "Get all deals subscribed by the user with total savings"
+					},
+					"response": []
+				}
+			],
+			"description": "Subscription management endpoints"
+		},
+		{
+			"name": "Error Testing",
+			"item": [
+				{
+					"name": "Invalid User ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/preferences",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"preferences"
+							]
+						},
+						"description": "Test invalid user ID format"
+					},
+					"response": []
+				},
+				{
+					"name": "User Not Found",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U999\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/preferences",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"preferences"
+							]
+						},
+						"description": "Test user not found scenario"
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Not Found",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"U001\",\n  \"deal_id\": 9999\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/subscribe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"subscribe"
+							]
+						},
+						"description": "Test deal not found scenario"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/deals/category/invalid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deals",
+								"category",
+								"invalid"
+							]
+						},
+						"description": "Test invalid category"
+					},
+					"response": []
+				}
+			],
+			"description": "Error testing scenarios"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script to set up test data",
+					"console.log('Setting up test data...');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate responses",
+					"pm.test('Status code is 200 or 201', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+					"});",
+					"",
+					"pm.test('Response has required fields', function () {",
+					"    const response = pm.response.json();",
+					"    pm.expect(response).to.have.property('status');",
+					"    pm.expect(response).to.have.property('message');",
+					"});",
+					"",
+					"pm.test('Response time is less than 2000ms', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+					"key": "base_url",
+		"value": "http://localhost:6000",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "U001",
+			"type": "string"
+		},
+		{
+			"key": "deal_id",
+			"value": "1005",
+			"type": "string"
+		}
+	]
+} 
