@@ -493,6 +493,53 @@ def is_user_subscribed_to_deal(user_id, deal_id, subscriptions_data):
     user_subscriptions = get_user_subscriptions(user_id, subscriptions_data)
     return str(deal_id) in user_subscriptions
 
+def detect_chat_intent(message):
+    """Detect intent from chat message and return appropriate action"""
+    message_lower = message.lower().strip()
+    
+    # Travel deals intent
+    travel_keywords = ['travel', 'trip', 'vacation', 'holiday', 'flight', 'hotel', 'booking']
+    if any(keyword in message_lower for keyword in travel_keywords):
+        return "category", "travel"
+    
+    # Entertainment deals intent
+    entertainment_keywords = ['entertainment', 'movie', 'show', 'concert', 'theater', 'music', 'game']
+    if any(keyword in message_lower for keyword in entertainment_keywords):
+        return "category", "entertainment"
+    
+    # Food deals intent
+    food_keywords = ['food', 'restaurant', 'dining', 'meal', 'eat', 'cuisine', 'dinner', 'lunch']
+    if any(keyword in message_lower for keyword in food_keywords):
+        return "category", "food"
+    
+    # Shopping deals intent
+    shopping_keywords = ['shopping', 'retail', 'store', 'buy', 'purchase', 'fashion', 'clothing']
+    if any(keyword in message_lower for keyword in shopping_keywords):
+        return "category", "shopping"
+    
+    # Technology deals intent
+    tech_keywords = ['technology', 'tech', 'electronics', 'gadget', 'device', 'computer', 'phone']
+    if any(keyword in message_lower for keyword in tech_keywords):
+        return "category", "technology"
+    
+    # Health deals intent
+    health_keywords = ['health', 'fitness', 'wellness', 'medical', 'gym', 'exercise', 'workout']
+    if any(keyword in message_lower for keyword in health_keywords):
+        return "category", "health"
+    
+    # Location-based deals intent
+    location_keywords = ['near me', 'location', 'local', 'nearby', 'area', 'city', 'state']
+    if any(keyword in message_lower for keyword in location_keywords):
+        return "location", None
+    
+    # Personalized deals intent
+    personalized_keywords = ['personalized', 'recommended', 'suggest', 'for me', 'my deals']
+    if any(keyword in message_lower for keyword in personalized_keywords):
+        return "personalized", None
+    
+    # Default: no specific intent detected
+    return None, None
+
 def filter_deals_by_location(deals_data, location=None, pincode=None):
     """Filter deals by location and/or pincode"""
     matching_deals = []
@@ -644,6 +691,9 @@ def location_deals_page():
                     del st.session_state.location_deals
                 if 'location_deals_state' in st.session_state:
                     del st.session_state.location_deals_state
+                # Clear chat messages when going back
+                if 'chat_messages' in st.session_state:
+                    st.session_state.chat_messages = []
                 st.rerun()
         
         with col2:
@@ -725,15 +775,14 @@ def category_deals_page():
         st.session_state.category_deals = []
         st.session_state.current_page = 0
     
-    # Back button and pagination controls as small icons
+    # Calculate pagination variables
     deals = st.session_state.category_deals
     current_page = st.session_state.current_page
     total_pages = (len(deals) + 5 - 1) // 5 if deals else 0
     
-    # Create a container for the navigation controls
+    # Back button and result header in a single row
     with st.container():
-        col1, col2, col3, col4, col5 = st.columns([1, 1, 2, 1, 1])
-        
+        col1, col2 = st.columns([1, 6])
         with col1:
             if st.button("←", key="back_category", help="Back to main page"):
                 st.session_state.selected_action = None
@@ -745,70 +794,53 @@ def category_deals_page():
                     del st.session_state.category_deals_state
                 if 'selected_category' in st.session_state:
                     del st.session_state.selected_category
+                # Clear chat messages when going back
+                if 'chat_messages' in st.session_state:
+                    st.session_state.chat_messages = []
                 st.rerun()
-        
         with col2:
-            if total_pages > 1 and current_page > 0:
+            if st.session_state.get('selected_category'):
+                header_text = f"🎯 <span style='font-size:18px; font-weight:700; color:#1f2937;'>{st.session_state.selected_category.title()} Deals Result</span>"
+                st.markdown(header_text, unsafe_allow_html=True)
+            else:
+                st.markdown("")
+
+    # Pagination controls row (if needed)
+    with st.container():
+        col_prev, col_page, col_next = st.columns([1, 6, 1])
+        if total_pages > 1 and current_page > 0:
+            with col_prev:
                 if st.button("‹", key="prev_category", help="Previous page"):
                     st.session_state.current_page = current_page - 1
                     st.rerun()
-            else:
+        else:
+            with col_prev:
                 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col3:
+        with col_page:
             if total_pages > 1:
                 st.markdown(f"<div style='text-align: center; font-size: 11px; color: #6b7280; font-weight: 500; padding-top: 4px;'>{current_page + 1}/{total_pages}</div>", unsafe_allow_html=True)
-        
-        with col4:
-            if total_pages > 1 and current_page < total_pages - 1:
+        if total_pages > 1 and current_page < total_pages - 1:
+            with col_next:
                 if st.button("›", key="next_category", help="Next page"):
                     st.session_state.current_page = current_page + 1
                     st.rerun()
-            else:
+        else:
+            with col_next:
                 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col5:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-    
-    # Add spacing for fixed chat
-    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
-    
-    if st.session_state.category_deals_state == 'select':
-        # Category selection
-        st.markdown("### 🎯 Browse Deals by Category")
-        st.markdown("Select a category to view available deals.")
-        
-        categories = list(deals_data.keys())
-        selected_category = st.selectbox("Choose Category", categories, key="category_select")
-        
-        if st.button("🔍 View Deals", key="view_category_deals"):
-            if selected_category:
-                category_deals = deals_data.get(selected_category, [])
-                st.session_state.selected_category = selected_category
-                st.session_state.category_deals = category_deals
-                st.session_state.current_page = 0
-                st.session_state.category_deals_state = 'results'
-                st.rerun()
-    
-    elif st.session_state.category_deals_state == 'results':
-        # Display results
+
+    # No extra spacing here, deal cards start immediately after header/pagination
+    if st.session_state.category_deals_state == 'results':
         deals = st.session_state.category_deals
         current_page = st.session_state.current_page
         deals_per_page = 5
-        category = st.session_state.selected_category
-        
         if not deals:
-            st.warning(f"No deals found for {category} category.")
+            st.warning(f"No deals found for {st.session_state.selected_category} category.")
             if st.button("Try Different Category", key="try_again_category"):
                 st.session_state.category_deals_state = 'select'
                 st.rerun()
         else:
-            # Use visible color for found deals text
-            st.markdown(f"<span style='font-size:14px; color:#1f2937; font-weight:600; margin: 8px 0; display: block;'>🎯 {category.title()} Deals ({len(deals)} found)</span>", unsafe_allow_html=True)
-            
-            # Display deals for current page
             display_deals_page(deals, current_page, deals_per_page)
-            
+
 
 
 def personalized_deals_page():
@@ -841,6 +873,9 @@ def personalized_deals_page():
                     del st.session_state.personalized_deals
                 if 'personalized_deals_state' in st.session_state:
                     del st.session_state.personalized_deals_state
+                # Clear chat messages when going back
+                if 'chat_messages' in st.session_state:
+                    st.session_state.chat_messages = []
                 st.rerun()
         
         with col2:
@@ -943,6 +978,78 @@ def chat_page():
     """Display chat page using only Streamlit components"""
     user = st.session_state.user
     
+    # Handle chat messages
+    if 'chat_messages' not in st.session_state:
+        st.session_state.chat_messages = []
+    
+    # Check for new chat message from form submission
+    if st.query_params.get('chat_message'):
+        chat_message = st.query_params.get('chat_message')
+        if chat_message and chat_message not in [msg.get('message', '') for msg in st.session_state.chat_messages]:
+            # Add user message to chat history
+            st.session_state.chat_messages.append({
+                'message': chat_message,
+                'sender': 'user',
+                'timestamp': get_current_time()
+            })
+            
+            # Detect intent and respond
+            intent, category = detect_chat_intent(chat_message)
+            
+            if intent == "category" and category:
+                # Navigate to category deals
+                st.session_state.selected_action = "category"
+                st.session_state.selected_category = category
+                st.session_state.category_deals_state = 'results'
+                st.session_state.current_page = 0
+                
+                # Load category deals
+                deals_data = load_deals_data()
+                category_deals = deals_data.get(category, [])
+                st.session_state.category_deals = category_deals
+                
+                # Add bot response
+                st.session_state.chat_messages.append({
+                    'message': f"Here are the {category.title()} deals for you!",
+                    'sender': 'bot',
+                    'timestamp': get_current_time()
+                })
+                
+            elif intent == "location":
+                # Navigate to location deals
+                st.session_state.selected_action = "location"
+                st.session_state.location_deals_state = 'input'
+                st.session_state.current_page = 0
+                
+                # Add bot response
+                st.session_state.chat_messages.append({
+                    'message': "I'll help you find deals by location. Please enter your location or pincode.",
+                    'sender': 'bot',
+                    'timestamp': get_current_time()
+                })
+                
+            elif intent == "personalized":
+                # Navigate to personalized deals
+                st.session_state.selected_action = "personalized"
+                st.session_state.current_page = 0
+                
+                # Add bot response
+                st.session_state.chat_messages.append({
+                    'message': "Here are your personalized deals based on your preferences!",
+                    'sender': 'bot',
+                    'timestamp': get_current_time()
+                })
+                
+            else:
+                # No intent detected
+                st.session_state.chat_messages.append({
+                    'message': "I'm here to help you find deals! You can ask for travel deals, entertainment deals, food deals, or deals by location. What would you like to explore?",
+                    'sender': 'bot',
+                    'timestamp': get_current_time()
+                })
+            
+            st.rerun()
+    
     # Get current time for status bar
     current_time = get_current_time()
     
@@ -976,6 +1083,25 @@ def chat_page():
         <p style="margin: 3px 0 0 0; color: #6b7280; font-size: 12px;">How can I assist you with deals today?</p>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Chat messages display
+    if st.session_state.chat_messages:
+       # st.markdown("### 💬 Chat History")
+        for msg in st.session_state.chat_messages[-5:]:  # Show last 5 messages
+            if msg['sender'] == 'user':
+                st.markdown(f"""
+                <div style="background: #e3f2fd; padding: 8px 12px; border-radius: 8px; margin: 4px 0; border: 1px solid #bbdefb; text-align: right;">
+                    <div style="color: #1565c0; font-size: 12px; font-weight: 500;">{msg['message']}</div>
+                    <div style="color: #90a4ae; font-size: 10px;">{msg['timestamp']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                <div style="background: #f3e5f5; padding: 8px 12px; border-radius: 8px; margin: 4px 0; border: 1px solid #e1bee7;">
+                    <div style="color: #7b1fa2; font-size: 12px; font-weight: 500;">{msg['message']}</div>
+                    <div style="color: #90a4ae; font-size: 10px;">{msg['timestamp']}</div>
+                </div>
+                """, unsafe_allow_html=True)
     
     # Create a container for the main content area with fixed height
     with st.container():
@@ -1016,90 +1142,110 @@ def chat_page():
                 st.session_state.current_page = 0
                 st.rerun()
     
-    # Fixed chat input area at bottom - always visible
+    # Fixed chat input at absolute footer
     st.markdown("""
     <style>
     .fixed-chat-container {
         position: fixed;
         bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 375px;
+        left: 0;
+        right: 0;
+        width: 100%;
         background: white;
         padding: 16px 20px;
         border-top: 1px solid #e5e7eb;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         z-index: 1000;
     }
-    .chat-input-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .chat-input-field {
-        flex: 1;
-        border: 1px solid #e5e7eb;
-        border-radius: 20px;
-        padding: 12px 16px;
-        font-size: 14px;
-        background: #f9fafb;
-    }
-    .chat-send-btn {
-        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    .chat-send-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    .chat-input-wrapper {
+        max-width: 375px;
+        margin: 0 auto;
     }
     </style>
     """, unsafe_allow_html=True)
     
-    # Fixed chat input at bottom
-    st.markdown("""
-    <div class="fixed-chat-container">
-        <div class="chat-input-row">
-            <input type="text" class="chat-input-field" placeholder="Type your message here..." id="chat-input">
-            <button class="chat-send-btn" onclick="sendMessage()">➤</button>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
     # Add bottom padding to prevent content from being hidden behind fixed chat
-    st.markdown("<div style='height: 80px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
     
-    # JavaScript for chat functionality
-    st.markdown("""
-    <script>
-    function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const message = input.value.trim();
-        if (message) {
-            // Here you would typically send the message to your backend
-            console.log('Sending message:', message);
-            input.value = '';
-            // You can add AJAX call here to send message to Streamlit
-        }
-    }
+    # Fixed chat input at absolute footer
+    st.markdown('<div class="fixed-chat-container">', unsafe_allow_html=True)
+    st.markdown('<div class="chat-input-wrapper">', unsafe_allow_html=True)
     
-    // Allow Enter key to send message
-    document.getElementById('chat-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
-    </script>
-    """, unsafe_allow_html=True)
+    # Chat input and send button
+    col1, col2 = st.columns([4, 1])
+    with col1:
+        chat_message = st.text_input("", placeholder="Type your message here...", key="chat_input_field", label_visibility="collapsed")
+    with col2:
+        if st.button("➤", key="send_chat_btn", help="Send message"):
+            if chat_message and chat_message.strip():
+                # Add user message to chat history
+                '''
+                st.session_state.chat_messages.append({
+                    'message': chat_message.strip(),
+                    'sender': 'user',
+                    'timestamp': get_current_time()
+                })
+                '''
+                
+                # Detect intent and respond
+                intent, category = detect_chat_intent(chat_message.strip())
+                
+                if intent == "category" and category:
+                    # Navigate to category deals
+                    st.session_state.selected_action = "category"
+                    st.session_state.selected_category = category
+                    st.session_state.category_deals_state = 'results'
+                    st.session_state.current_page = 0
+                    
+                    # Load category deals
+                    deals_data = load_deals_data()
+                    category_deals = deals_data.get(category, [])
+                    st.session_state.category_deals = category_deals
+                    
+                    # Add bot response
+                    st.session_state.chat_messages.append({
+                        'message': f"Here are the {category.title()} deals for you!",
+                        'sender': 'bot',
+                        'timestamp': get_current_time()
+                    })
+                    
+                elif intent == "location":
+                    # Navigate to location deals
+                    st.session_state.selected_action = "location"
+                    st.session_state.location_deals_state = 'input'
+                    st.session_state.current_page = 0
+                    
+                    # Add bot response
+                    st.session_state.chat_messages.append({
+                        'message': "I'll help you find deals by location. Please enter your location or pincode.",
+                        'sender': 'bot',
+                        'timestamp': get_current_time()
+                    })
+                    
+                elif intent == "personalized":
+                    # Navigate to personalized deals
+                    st.session_state.selected_action = "personalized"
+                    st.session_state.current_page = 0
+                    
+                    # Add bot response
+                    st.session_state.chat_messages.append({
+                        'message': "Here are your personalized deals based on your preferences!",
+                        'sender': 'bot',
+                        'timestamp': get_current_time()
+                    })
+                    
+                else:
+                    # No intent detected
+                    st.session_state.chat_messages.append({
+                        'message': "I'm here to help you find deals! You can ask for travel deals, entertainment deals, food deals, or deals by location. What would you like to explore?",
+                        'sender': 'bot',
+                        'timestamp': get_current_time()
+                    })
+                
+                st.rerun()
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 def main():
     """Main application function"""
