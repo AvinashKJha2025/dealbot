@@ -1,0 +1,22 @@
+[
+    {
+        "user_ecn": "592764611941116",
+        "deals_activated": ["TRAV001", "ENT001", "HOME001", "FOOD001", "FASH001", "FIT001"]
+    },
+    {
+        "user_ecn": "592764611941117",
+        "deals_activated": ["TRAV002", "HEAL001", "FOOD002", "EVENT001", "SPORT001", "FIT002"]
+    },
+    {
+        "user_ecn": "592764611941118",
+        "deals_activated": ["ENT002", "HEAL002", "HOME002", "EVENT002", "FASH002", "FIT003"]
+    },
+    {
+        "user_ecn": "592764611941119",
+        "deals_activated": ["TRAV003", "HOME003", "FOOD003", "SPORT002", "FIT004"]
+    },
+    {
+        "user_ecn": "592764611941120",
+        "deals_activated": ["ENT003", "HEAL003", "FOOD004", "EVENT003", "FASH003", "SPORT003", "FIT005"]
+    }
+]

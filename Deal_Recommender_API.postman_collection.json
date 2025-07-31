@@ -1,0 +1,969 @@
+{
+	"info": {
+		"_postman_id": "deal-recommender-api-collection",
+		"name": "Deal Recommender API",
+		"description": "Comprehensive Postman collection for testing the Deal Recommendation Chatbot API. Includes tests for category, location, merchant, amount, and timeline searches.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Health check endpoint to verify the API is running"
+			},
+			"response": []
+		},
+		{
+			"name": "Category Searches",
+			"item": [
+				{
+					"name": "Show me deals for travel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals for travel\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for travel deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me travel deals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get me travel deals\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Alternative travel deals search"
+					},
+					"response": []
+				},
+				{
+					"name": "Show me deals related to entertainment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals related to entertainment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for entertainment deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deals for health",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals for health\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for health deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Show me home deals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me home deals\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for home deals"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for category-based deal searches"
+		},
+		{
+			"name": "Location Searches",
+			"item": [
+				{
+					"name": "Show me deals from New York",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals from New York\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals in New York"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deals available in California",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals available in California\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals in California"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals from Miami",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals from Miami\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals in Miami"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me deals in Chicago",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get me deals in Chicago\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals in Chicago"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals available in Austin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals available in Austin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals in Austin"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for location-based deal searches"
+		},
+		{
+			"name": "Merchant Searches",
+			"item": [
+				{
+					"name": "Show me deals from Netflix",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals from Netflix\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for Netflix deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deals from Amazon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals from Amazon\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for Amazon deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals from Nike",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals from Nike\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for Nike deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me deals from Expedia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get me deals from Expedia\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for Expedia deals"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals from CVS Pharmacy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals from CVS Pharmacy\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for CVS Pharmacy deals"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for merchant-based deal searches"
+		},
+		{
+			"name": "Amount Searches",
+			"item": [
+				{
+					"name": "Show me deals under $50",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals under $50\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals under $50"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deals under $100",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals under $100\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals under $100"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals below $30",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals below $30\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals below $30"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me deals under $75",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get me deals under $75\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals under $75"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals less than $40",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals less than $40\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals less than $40"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for amount-based deal searches"
+		},
+		{
+			"name": "Timeline Searches",
+			"item": [
+				{
+					"name": "Show deals expiring this week",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals expiring this week\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals expiring this week"
+					},
+					"response": []
+				},
+				{
+					"name": "Get me deals available in March",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get me deals available in March\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals available in March"
+					},
+					"response": []
+				},
+				{
+					"name": "Show deals available in April",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals available in April\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals available in April"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deals expiring this week",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals expiring this week\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Alternative search for deals expiring this week"
+					},
+					"response": []
+				},
+				{
+					"name": "Show me deals available in September",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals available in September\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Search for deals available in September"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for timeline-based deal searches"
+		},
+		{
+			"name": "Edge Cases & Error Handling",
+			"item": [
+				{
+					"name": "Empty chat text",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test empty chat text - should return 400 error"
+					},
+					"response": []
+				},
+				{
+					"name": "Missing chat_text field",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test missing chat_text field - should return 400 error"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existent category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals for nonexistentcategory\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test non-existent category - should return 200 with no results"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existent merchant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Get deals from nonexistentmerchant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test non-existent merchant - should return 200 with no results"
+					},
+					"response": []
+				},
+				{
+					"name": "Zero amount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show deals under $0\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test zero amount - should return 200 with no results"
+					},
+					"response": []
+				},
+				{
+					"name": "Random text",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Random text that doesn't match any pattern\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test random text - should return 200 with no results"
+					},
+					"response": []
+				},
+				{
+					"name": "Incomplete category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_text\": \"Show me deals for\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Test incomplete category - should return 200 with no results"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for edge cases and error handling"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script for validating responses",
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"Response has required fields\", function () {",
+					"    const response = pm.response.json();",
+					"    pm.expect(response).to.have.property('message');",
+					"    pm.expect(response).to.have.property('results');",
+					"    pm.expect(response.results).to.be.an('array');",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 2000ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+} 

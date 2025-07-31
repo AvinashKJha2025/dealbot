@@ -1,0 +1,92 @@
+[
+    {
+        "user_ecn": "592764611941116",
+        "user_name": "Sarah Johnson",
+        "user_gender": "Female",
+        "user_location": "New York, NY",
+        "user_pincode": "10001",
+        "user_preferences": {
+            "travel": true,
+            "entertainment": true,
+            "health": false,
+            "home": true,
+            "food/drink": true,
+            "events": false,
+            "fashion": true,
+            "sports": false,
+            "fitness": true
+        }
+    },
+    {
+        "user_ecn": "592764611941117",
+        "user_name": "Michael Chen",
+        "user_gender": "Male",
+        "user_location": "San Francisco, CA",
+        "user_pincode": "94102",
+        "user_preferences": {
+            "travel": true,
+            "entertainment": false,
+            "health": true,
+            "home": false,
+            "food/drink": true,
+            "events": true,
+            "fashion": false,
+            "sports": true,
+            "fitness": true
+        }
+    },
+    {
+        "user_ecn": "592764611941118",
+        "user_name": "Emily Rodriguez",
+        "user_gender": "Female",
+        "user_location": "Miami, FL",
+        "user_pincode": "33101",
+        "user_preferences": {
+            "travel": false,
+            "entertainment": true,
+            "health": true,
+            "home": true,
+            "food/drink": false,
+            "events": true,
+            "fashion": true,
+            "sports": false,
+            "fitness": true
+        }
+    },
+    {
+        "user_ecn": "592764611941119",
+        "user_name": "David Thompson",
+        "user_gender": "Male",
+        "user_location": "Chicago, IL",
+        "user_pincode": "60601",
+        "user_preferences": {
+            "travel": true,
+            "entertainment": false,
+            "health": false,
+            "home": true,
+            "food/drink": true,
+            "events": false,
+            "fashion": false,
+            "sports": true,
+            "fitness": false
+        }
+    },
+    {
+        "user_ecn": "592764611941120",
+        "user_name": "Jessica Williams",
+        "user_gender": "Female",
+        "user_location": "Austin, TX",
+        "user_pincode": "73301",
+        "user_preferences": {
+            "travel": false,
+            "entertainment": true,
+            "health": true,
+            "home": false,
+            "food/drink": true,
+            "events": true,
+            "fashion": true,
+            "sports": true,
+            "fitness": false
+        }
+    }
+]

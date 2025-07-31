@@ -1,0 +1,42 @@
+[
+    {
+        "user_ecn": "592764611941116",
+        "data": "{\"transaction_id\": \"TX001\", \"amount\": 150.00, \"merchant\": \"Expedia\", \"category\": \"travel\", \"date\": \"2025-01-15\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941116",
+        "data": "{\"transaction_id\": \"TX002\", \"amount\": 25.00, \"merchant\": \"Netflix\", \"category\": \"entertainment\", \"date\": \"2025-01-20\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941117",
+        "data": "{\"transaction_id\": \"TX003\", \"amount\": 200.00, \"merchant\": \"Booking.com\", \"category\": \"travel\", \"date\": \"2025-01-18\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941117",
+        "data": "{\"transaction_id\": \"TX004\", \"amount\": 75.00, \"merchant\": \"CVS Pharmacy\", \"category\": \"health\", \"date\": \"2025-01-22\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941118",
+        "data": "{\"transaction_id\": \"TX005\", \"amount\": 45.00, \"merchant\": \"Disney+\", \"category\": \"entertainment\", \"date\": \"2025-01-19\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941118",
+        "data": "{\"transaction_id\": \"TX006\", \"amount\": 120.00, \"merchant\": \"Walgreens\", \"category\": \"health\", \"date\": \"2025-01-25\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941119",
+        "data": "{\"transaction_id\": \"TX007\", \"amount\": 180.00, \"merchant\": \"Airbnb\", \"category\": \"travel\", \"date\": \"2025-01-21\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941119",
+        "data": "{\"transaction_id\": \"TX008\", \"amount\": 85.00, \"merchant\": \"Home Depot\", \"category\": \"home\", \"date\": \"2025-01-24\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941120",
+        "data": "{\"transaction_id\": \"TX009\", \"amount\": 35.00, \"merchant\": \"Hulu\", \"category\": \"entertainment\", \"date\": \"2025-01-23\", \"status\": \"completed\"}"
+    },
+    {
+        "user_ecn": "592764611941120",
+        "data": "{\"transaction_id\": \"TX010\", \"amount\": 95.00, \"merchant\": \"Rite Aid\", \"category\": \"health\", \"date\": \"2025-01-26\", \"status\": \"completed\"}"
+    }
+]

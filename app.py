@@ -1,7 +1,6 @@
 import streamlit as st
 import json
 import os
-import requests
 from pathlib import Path
 from datetime import datetime
 
@@ -156,7 +155,7 @@ st.markdown("""
     .stButton > button {
         border-radius: 12px;
         background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        color: white !important;
+        color: white;
         border: none;
         padding: 18px 32px;
         font-size: 16px;
@@ -260,123 +259,6 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.1);
     }
     
-    /* Deal card styling */
-    .deal-card {
-        background: white;
-        border-radius: 12px;
-        padding: 16px;
-        margin: 8px 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        border: 1px solid #e5e7eb;
-    }
-    
-    .deal-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1f2937;
-        margin-bottom: 8px;
-    }
-    
-    .deal-description {
-        font-size: 14px;
-        color: #374151;
-        margin-bottom: 8px;
-        line-height: 1.4;
-    }
-    
-    .deal-details {
-        font-size: 12px;
-        color: #6b7280;
-        margin-bottom: 4px;
-    }
-    
-    .deal-savings {
-        font-size: 16px;
-        font-weight: 700;
-        color: #16a34a;
-        margin-top: 8px;
-    }
-    
-    .deal-code {
-        background: #f3f4f6;
-        color: #1f2937;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-block;
-        margin-top: 8px;
-    }
-    
-    /* Pagination styling */
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin: 20px 0;
-    }
-    
-    .pagination button {
-        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    
-    .pagination button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-    
-    .pagination button:disabled {
-        background: #e5e7eb;
-        color: #9ca3af;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-    }
-    
-    .page-info {
-        font-size: 14px;
-        color: #1f2937;
-        font-weight: 500;
-    }
-    
-    /* Back button styling */
-    .back-button {
-        background: #f3f4f6;
-        color: #1f2937;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        margin-bottom: 15px;
-    }
-    
-    .back-button:hover {
-        background: #e5e7eb;
-        color: #1f2937;
-    }
-    
-    /* Force dark text for all non-button elements */
-    h1, h2, h3, h4, h5, h6, p, span, div, label {
-        color: #1f2937 !important;
-    }
-    
-    /* Only button text should be white */
-    .stButton > button {
-        color: white !important;
-    }
-    
     /* Mobile responsive */
     @media (max-width: 480px) {
         .main, .block-container {
@@ -405,31 +287,12 @@ def get_current_time():
     return datetime.now().strftime("%H:%M")
 
 def load_user_data():
-    """Load user data from sample_users.json file"""
+    """Load user data from JSON file"""
     try:
-        with open('data/sample_users.json', 'r') as file:
+        with open('data/user_details.json', 'r') as file:
             return json.load(file)
     except FileNotFoundError:
         st.error("User data file not found!")
-        return []
-
-def load_deals_data():
-    """Load deals data from sample_deals.json file"""
-    try:
-        with open('data/sample_deals.json', 'r') as file:
-            data = json.load(file)
-            return data.get('deals', {})
-    except FileNotFoundError:
-        st.error("Deals data file not found!")
-        return {}
-
-def load_subscriptions_data():
-    """Load subscriptions data from sample_subscriptions.json file"""
-    try:
-        with open('data/sample_subscriptions.json', 'r') as file:
-            return json.load(file)
-    except FileNotFoundError:
-        st.error("Subscriptions data file not found!")
         return []
 
 def authenticate_user(user_id, users):
@@ -438,516 +301,6 @@ def authenticate_user(user_id, users):
         if user['user_id'] == user_id:
             return user
     return None
-
-def get_user_subscriptions(user_id, subscriptions_data):
-    """Get subscribed deals for a specific user"""
-    for subscription in subscriptions_data:
-        if subscription['user_id'] == user_id:
-            return subscription['subscribed_deals'].split(',')
-    return []
-
-def subscribe_to_deal(deal_id):
-    """Subscribe user to a deal by making POST call to backend"""
-    try:
-        import requests
-        
-        # Get current user
-        user = st.session_state.get('user')
-        if not user:
-            st.error("User not logged in!")
-            return
-        
-        # Prepare the subscription data
-        subscription_data = {
-            "user_id": user['user_id'],
-            "deal_id": deal_id
-        }
-        
-        # Make POST request to backend API
-        # You can update this URL to match your backend endpoint
-        api_url = "http://localhost:8000/subscribe"  # Update this to your actual backend URL
-        
-        response = requests.post(
-            api_url,
-            json=subscription_data,
-            headers={"Content-Type": "application/json"},
-            timeout=10
-        )
-        
-        if response.status_code == 200:
-            st.success(f"Successfully subscribed to deal {deal_id}!")
-            # Optionally refresh the page or update local state
-            st.rerun()
-        elif response.status_code == 409:
-            st.warning("You are already subscribed to this deal!")
-        else:
-            st.error(f"Failed to subscribe: {response.status_code} - {response.text}")
-            
-    except requests.exceptions.RequestException as e:
-        st.error(f"Network error: {str(e)}")
-    except Exception as e:
-        st.error(f"Error subscribing to deal: {str(e)}")
-
-def is_user_subscribed_to_deal(user_id, deal_id, subscriptions_data):
-    """Check if user is already subscribed to a specific deal"""
-    user_subscriptions = get_user_subscriptions(user_id, subscriptions_data)
-    return str(deal_id) in user_subscriptions
-
-def detect_chat_intent(message):
-    """Detect intent from chat message and return appropriate action"""
-    message_lower = message.lower().strip()
-    
-    # Travel deals intent
-    travel_keywords = ['travel', 'trip', 'vacation', 'holiday', 'flight', 'hotel', 'booking']
-    if any(keyword in message_lower for keyword in travel_keywords):
-        return "category", "travel"
-    
-    # Entertainment deals intent
-    entertainment_keywords = ['entertainment', 'movie', 'show', 'concert', 'theater', 'music', 'game']
-    if any(keyword in message_lower for keyword in entertainment_keywords):
-        return "category", "entertainment"
-    
-    # Food deals intent
-    food_keywords = ['food', 'restaurant', 'dining', 'meal', 'eat', 'cuisine', 'dinner', 'lunch']
-    if any(keyword in message_lower for keyword in food_keywords):
-        return "category", "food"
-    
-    # Shopping deals intent
-    shopping_keywords = ['shopping', 'retail', 'store', 'buy', 'purchase', 'fashion', 'clothing']
-    if any(keyword in message_lower for keyword in shopping_keywords):
-        return "category", "shopping"
-    
-    # Technology deals intent
-    tech_keywords = ['technology', 'tech', 'electronics', 'gadget', 'device', 'computer', 'phone']
-    if any(keyword in message_lower for keyword in tech_keywords):
-        return "category", "technology"
-    
-    # Health deals intent
-    health_keywords = ['health', 'fitness', 'wellness', 'medical', 'gym', 'exercise', 'workout']
-    if any(keyword in message_lower for keyword in health_keywords):
-        return "category", "health"
-    
-    # Location-based deals intent
-    location_keywords = ['near me', 'location', 'local', 'nearby', 'area', 'city', 'state']
-    if any(keyword in message_lower for keyword in location_keywords):
-        return "location", None
-    
-    # Personalized deals intent
-    personalized_keywords = ['personalized', 'recommended', 'suggest', 'for me', 'my deals']
-    if any(keyword in message_lower for keyword in personalized_keywords):
-        return "personalized", None
-    
-    # Default: no specific intent detected
-    return None, None
-
-def filter_deals_by_location(deals_data, location=None, pincode=None):
-    """Filter deals by location and/or pincode"""
-    matching_deals = []
-    
-    for category, category_deals in deals_data.items():
-        for deal in category_deals:
-            match_location = False
-            match_pincode = False
-            
-            # Check location match
-            if location and location.lower() in deal.get('location_state', '').lower():
-                match_location = True
-            # Check pincode match
-            if pincode and pincode in deal.get('location_pincode', ''):
-                match_pincode = True
-            
-            # If both location and pincode are provided, both must match
-            if location and pincode:
-                if match_location and match_pincode:
-                    matching_deals.append(deal)
-            # If only location is provided
-            elif location and not pincode:
-                if match_location:
-                    matching_deals.append(deal)
-            # If only pincode is provided
-            elif pincode and not location:
-                if match_pincode:
-                    matching_deals.append(deal)
-    
-    return matching_deals
-
-def display_deals_page(deals, page, deals_per_page=5):
-    """Display deals for a specific page in single row cards"""
-    start_idx = page * deals_per_page
-    end_idx = start_idx + deals_per_page
-    page_deals = deals[start_idx:end_idx]
-    
-    # Get user subscription status
-    user = st.session_state.get('user')
-    subscriptions_data = load_subscriptions_data()
-    user_subscriptions = get_user_subscriptions(user['user_id'], subscriptions_data) if user else []
-    
-    for i, deal in enumerate(page_deals):
-        # Extract deal code from description and clean description
-        deal_code = deal['description'].split('Use code ')[-1].split(' ')[0] if 'Use code ' in deal['description'] else 'N/A'
-        clean_description = deal['description'].split('Use code ')[0].strip() if 'Use code ' in deal['description'] else deal['description']
-        
-        # Check if user is already subscribed to this deal
-        is_subscribed = str(deal['deal_id']) in user_subscriptions
-        
-        # Create two-column layout: deal info + subscribe button
-        col1, col2 = st.columns([4, 1])
-        
-        with col1:
-            st.markdown(f"""
-            <div style="background: white; padding: 8px 12px; border-radius: 8px; margin: 4px 0; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: 100%;">
-                <div style="display: flex; flex-direction: column; width: 100%;">
-                    <div style="font-weight: 600; color: #1f2937; font-size: 11px; margin-bottom: 2px; line-height: 1.2;">{clean_description[:70]}{'...' if len(clean_description) > 70 else ''}</div>
-                    <div style="color: #6b7280; font-size: 10px; margin-bottom: 4px;">{deal.get('location_state', 'N/A')} • {deal['category'].title()}</div>
-                    <div style="background: #f0fdf4; padding: 4px 8px; border-radius: 4px; border: 1px solid #bbf7d0; text-align: center; display: inline-block; width: fit-content;">
-                        <div style="font-weight: 700; color: #16a34a; font-size: 10px;">{deal['amount_saved']}</div>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col2:
-            # Tick mark as subscribe button
-            if is_subscribed:
-                # Show subscribed state (non-clickable)
-                st.markdown(f"""
-                <div style="background: #dcfce7; padding: 4px 8px; border-radius: 4px; border: 1px solid #22c55e; text-align: center; min-width: 35px; margin: 4px 0;">
-                    <div style="font-weight: 600; color: #16a34a; font-size: 12px;">✓</div>
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                # Tick mark as subscribe button
-                if st.button("✓", key=f"subscribe_{deal['deal_id']}_{page}_{i}", help="Subscribe to this deal"):
-                    subscribe_to_deal(deal['deal_id'])
-
-def display_pagination_controls(deals, current_page, deals_per_page=5, page_key_prefix=""):
-    """Display pagination controls as footer"""
-    total_pages = (len(deals) + deals_per_page - 1) // deals_per_page
-    
-    if total_pages > 1:
-        st.markdown("""
-        <div style="background: white; padding: 8px 16px; border: 1px solid #e5e7eb; margin-top: 16px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <button id="prev-btn" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border: none; border-radius: 4px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;" """ + f"""onclick="changePage({current_page - 1}, '{page_key_prefix}')" """ + f"""{"disabled" if current_page == 0 else ""}">← Previous</button>
-                <span style="font-size: 11px; color: #1f2937; font-weight: 500;">Page {current_page + 1} of {total_pages}</span>
-                <button id="next-btn" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border: none; border-radius: 4px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;" """ + f"""onclick="changePage({current_page + 1}, '{page_key_prefix}')" """ + f"""{"disabled" if current_page >= total_pages - 1 else ""}">Next →</button>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Add JavaScript for pagination
-        st.markdown(f"""
-        <script>
-        function changePage(newPage, prefix) {{
-            // This would typically trigger a Streamlit rerun with the new page
-            console.log('Changing to page:', newPage, 'for prefix:', prefix);
-            // For now, we'll use a simple approach - you can enhance this with AJAX
-            window.location.href = window.location.href + '&page=' + newPage + '&prefix=' + prefix;
-        }}
-        </script>
-        """, unsafe_allow_html=True)
-
-def get_personalized_deals(user, deals_data, subscriptions_data):
-    """Get personalized deals based on user preferences and subscriptions"""
-    personalized_deals = []
-    user_preferences = user.get('user_preferences', {})
-    user_subscriptions = get_user_subscriptions(user['user_id'], subscriptions_data)
-    
-    for category, category_deals in deals_data.items():
-        # Check if user has preference for this category
-        if user_preferences.get(category, False):
-            for deal in category_deals:
-                # Check if user is already subscribed to this deal
-                if str(deal['deal_id']) not in user_subscriptions:
-                    personalized_deals.append(deal)
-    
-    return personalized_deals
-
-def location_deals_page():
-    """Display location-based deals page"""
-    deals_data = load_deals_data()
-    
-    # Initialize session state for location deals
-    if 'location_deals_state' not in st.session_state:
-        st.session_state.location_deals_state = 'input'  # 'input' or 'results'
-        st.session_state.location_deals = []
-        st.session_state.current_page = 0
-    
-    # Back button and pagination controls as small icons
-    deals = st.session_state.location_deals
-    current_page = st.session_state.current_page
-    total_pages = (len(deals) + 5 - 1) // 5 if deals else 0
-    
-    # Create a container for the navigation controls
-    with st.container():
-        col1, col2, col3, col4, col5 = st.columns([1, 1, 2, 1, 1])
-        
-        with col1:
-            if st.button("←", key="back_location", help="Back to main page"):
-                st.session_state.selected_action = None
-                st.session_state.current_page = 0
-                # Clear cached location deals data
-                if 'location_deals' in st.session_state:
-                    del st.session_state.location_deals
-                if 'location_deals_state' in st.session_state:
-                    del st.session_state.location_deals_state
-                # Clear chat messages when going back
-                if 'chat_messages' in st.session_state:
-                    st.session_state.chat_messages = []
-                st.rerun()
-        
-        with col2:
-            if total_pages > 1 and current_page > 0:
-                if st.button("‹", key="prev_location", help="Previous page"):
-                    st.session_state.current_page = current_page - 1
-                    st.rerun()
-            else:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col3:
-            if total_pages > 1:
-                st.markdown(f"<div style='text-align: center; font-size: 11px; color: #6b7280; font-weight: 500; padding-top: 4px;'>{current_page + 1}/{total_pages}</div>", unsafe_allow_html=True)
-        
-        with col4:
-            if total_pages > 1 and current_page < total_pages - 1:
-                if st.button("›", key="next_location", help="Next page"):
-                    st.session_state.current_page = current_page + 1
-                    st.rerun()
-            else:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col5:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-    
-    # Add spacing for fixed chat
-    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
-    
-    if st.session_state.location_deals_state == 'input':
-        # Location input form
-        st.markdown("##### 📍 Find Deals by Location")
-        st.markdown("<span style='font-size: 10px; color: #6b7280;'>Enter location (state) and/or pincode to find deals near you.</span>", unsafe_allow_html=True)
-        
-        # Use Streamlit's text_input for visible text color
-        location = st.text_input("Location (State)", placeholder="e.g., California, New York", key="location_input")
-        pincode = st.text_input("Pincode", placeholder="e.g., 90210", key="pincode_input")
-        
-        # Search button with magnifying glass icon - right aligned
-        col1, col2, col3 = st.columns([2, 1, 1])
-        with col3:
-            if st.button("🔍", key="search_deals", use_container_width=False):
-                if not location and not pincode:
-                    st.error("Please enter either location or pincode (or both).")
-                else:
-                    matching_deals = filter_deals_by_location(deals_data, location, pincode)
-                    st.session_state.location_deals = matching_deals
-                    st.session_state.current_page = 0
-                    st.session_state.location_deals_state = 'results'
-                    st.rerun()
-    
-    elif st.session_state.location_deals_state == 'results':
-        # Display results
-        deals = st.session_state.location_deals
-        current_page = st.session_state.current_page
-        deals_per_page = 5
-        
-        if not deals:
-            st.warning("No deals found for the specified location/pincode.")
-            if st.button("Try Different Search", key="try_again"):
-                st.session_state.location_deals_state = 'input'
-                st.rerun()
-        else:
-            # Use visible color for found deals text
-            st.markdown(f"<span style='font-size:14px; color:#1f2937; font-weight:600; margin: 8px 0; display: block;'>📍 Found {len(deals)} Deals</span>", unsafe_allow_html=True)
-            
-            # Display deals for current page
-            display_deals_page(deals, current_page, deals_per_page)
-            
-
-
-def category_deals_page():
-    """Display category-based deals page"""
-    deals_data = load_deals_data()
-    
-    # Initialize session state for category deals
-    if 'category_deals_state' not in st.session_state:
-        st.session_state.category_deals_state = 'select'  # 'select' or 'results'
-        st.session_state.selected_category = None
-        st.session_state.category_deals = []
-        st.session_state.current_page = 0
-    
-    # Calculate pagination variables
-    deals = st.session_state.category_deals
-    current_page = st.session_state.current_page
-    total_pages = (len(deals) + 5 - 1) // 5 if deals else 0
-    
-    # Back button and result header in a single row
-    with st.container():
-        col1, col2 = st.columns([1, 6])
-        with col1:
-            if st.button("←", key="back_category", help="Back to main page"):
-                st.session_state.selected_action = None
-                st.session_state.current_page = 0
-                # Clear cached category deals data
-                if 'category_deals' in st.session_state:
-                    del st.session_state.category_deals
-                if 'category_deals_state' in st.session_state:
-                    del st.session_state.category_deals_state
-                if 'selected_category' in st.session_state:
-                    del st.session_state.selected_category
-                # Clear chat messages when going back
-                if 'chat_messages' in st.session_state:
-                    st.session_state.chat_messages = []
-                st.rerun()
-        with col2:
-            if st.session_state.get('selected_category'):
-                header_text = f"🎯 <span style='font-size:18px; font-weight:700; color:#1f2937;'>{st.session_state.selected_category.title()} Deals Result</span>"
-                st.markdown(header_text, unsafe_allow_html=True)
-            else:
-                st.markdown("")
-
-    # Pagination controls row (if needed)
-    with st.container():
-        col_prev, col_page, col_next = st.columns([1, 6, 1])
-        if total_pages > 1 and current_page > 0:
-            with col_prev:
-                if st.button("‹", key="prev_category", help="Previous page"):
-                    st.session_state.current_page = current_page - 1
-                    st.rerun()
-        else:
-            with col_prev:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        with col_page:
-            if total_pages > 1:
-                st.markdown(f"<div style='text-align: center; font-size: 11px; color: #6b7280; font-weight: 500; padding-top: 4px;'>{current_page + 1}/{total_pages}</div>", unsafe_allow_html=True)
-        if total_pages > 1 and current_page < total_pages - 1:
-            with col_next:
-                if st.button("›", key="next_category", help="Next page"):
-                    st.session_state.current_page = current_page + 1
-                    st.rerun()
-        else:
-            with col_next:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-
-    # Category selection or results display
-    if st.session_state.category_deals_state == 'select':
-        # Category selection interface
-        st.markdown("##### 🎯 Browse Deals by Category")
-        st.markdown("Select a category to view available deals.")
-        
-        categories = list(deals_data.keys())
-        selected_category = st.selectbox("Choose Category", categories, key="category_select")
-        
-        if st.button("🔍", key="view_category_deals"):
-            if selected_category:
-                category_deals = deals_data.get(selected_category, [])
-                st.session_state.selected_category = selected_category
-                st.session_state.category_deals = category_deals
-                st.session_state.current_page = 0
-                st.session_state.category_deals_state = 'results'
-                st.rerun()
-    
-    elif st.session_state.category_deals_state == 'results':
-        # Display results
-        deals = st.session_state.category_deals
-        current_page = st.session_state.current_page
-        deals_per_page = 5
-        if not deals:
-            st.warning(f"No deals found for {st.session_state.selected_category} category.")
-            if st.button("Try Different Category", key="try_again_category"):
-                st.session_state.category_deals_state = 'select'
-                st.rerun()
-        else:
-            display_deals_page(deals, current_page, deals_per_page)
-
-
-
-def personalized_deals_page():
-    """Display personalized deals based on user preferences"""
-    user = st.session_state.user
-    deals_data = load_deals_data()
-    subscriptions_data = load_subscriptions_data()
-    
-    # Initialize session state for personalized deals
-    if 'personalized_deals_state' not in st.session_state:
-        st.session_state.personalized_deals_state = 'loading'
-        st.session_state.personalized_deals = []
-        st.session_state.current_page = 0
-    
-    # Back button and pagination controls as small icons
-    deals = st.session_state.personalized_deals
-    current_page = st.session_state.current_page
-    total_pages = (len(deals) + 5 - 1) // 5 if deals else 0
-    
-    # Create a container for the navigation controls
-    with st.container():
-        col1, col2, col3, col4, col5 = st.columns([1, 1, 2, 1, 1])
-        
-        with col1:
-            if st.button("←", key="back_personalized", help="Back to main page"):
-                st.session_state.selected_action = None
-                st.session_state.current_page = 0
-                # Clear cached personalized deals data
-                if 'personalized_deals' in st.session_state:
-                    del st.session_state.personalized_deals
-                if 'personalized_deals_state' in st.session_state:
-                    del st.session_state.personalized_deals_state
-                # Clear chat messages when going back
-                if 'chat_messages' in st.session_state:
-                    st.session_state.chat_messages = []
-                st.rerun()
-        
-        with col2:
-            if total_pages > 1 and current_page > 0:
-                if st.button("‹", key="prev_personalized", help="Previous page"):
-                    st.session_state.current_page = current_page - 1
-                    st.rerun()
-            else:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col3:
-            if total_pages > 1:
-                st.markdown(f"<div style='text-align: center; font-size: 11px; color: #6b7280; font-weight: 500; padding-top: 4px;'>{current_page + 1}/{total_pages}</div>", unsafe_allow_html=True)
-        
-        with col4:
-            if total_pages > 1 and current_page < total_pages - 1:
-                if st.button("›", key="next_personalized", help="Next page"):
-                    st.session_state.current_page = current_page + 1
-                    st.rerun()
-            else:
-                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        with col5:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-    
-    # Add spacing for fixed chat
-    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
-    
-    # Get personalized deals
-    if st.session_state.personalized_deals_state == 'loading':
-        personalized_deals = get_personalized_deals(user, deals_data, subscriptions_data)
-        st.session_state.personalized_deals = personalized_deals
-        st.session_state.personalized_deals_state = 'results'
-        st.rerun()
-    
-    elif st.session_state.personalized_deals_state == 'results':
-        deals = st.session_state.personalized_deals
-        current_page = st.session_state.current_page
-        deals_per_page = 5
-        
-        if not deals:
-            st.warning("No personalized deals found based on your preferences.")
-            st.info("Try updating your preferences or browse deals by category.")
-            if st.button("Browse All Categories", key="browse_categories"):
-                st.session_state.selected_action = "category"
-                st.rerun()
-        else:
-            # Use visible color for found deals text
-            st.markdown(f"<span style='font-size:14px; color:#1f2937; font-weight:600; margin: 8px 0; display: block;'>🎯 Personalized Deals ({len(deals)} found)</span>", unsafe_allow_html=True)
-            
-            # Display deals for current page
-            display_deals_page(deals, current_page, deals_per_page)
-            
-
 
 def login_page():
     """Display login page using professional Wells Fargo style design"""
@@ -964,13 +317,19 @@ def login_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # App header - Professional Fargo Deal Bot style (centered)
+    # App header - Professional Wells Fargo style (centered)
     st.markdown("""
     <div style="text-align: center; padding: 25px 20px 15px;">
-        <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #1f2937; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;">FARGO DEAL BOT</h1>
+        <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 8px; color: #1f2937; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;">DEALSBOT</h1>
         <p style="font-size: 20px; color: #6b7280; font-weight: 400; margin-bottom: 35px; line-height: 1.3;">""" + greeting + """</p>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Add a small vertical space
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # User ID label (Streamlit only, no HTML container)
+    st.markdown('<span style="font-size: 14px; font-weight: 600; color: #374151;">User ID</span>', unsafe_allow_html=True)
     
     # User ID input field (Streamlit only)
     user_id = st.text_input("User ID", placeholder="Enter your User ID", key="user_id_input")
@@ -996,78 +355,6 @@ def chat_page():
     """Display chat page using only Streamlit components"""
     user = st.session_state.user
     
-    # Handle chat messages
-    if 'chat_messages' not in st.session_state:
-        st.session_state.chat_messages = []
-    
-    # Check for new chat message from form submission
-    if st.query_params.get('chat_message'):
-        chat_message = st.query_params.get('chat_message')
-        if chat_message and chat_message not in [msg.get('message', '') for msg in st.session_state.chat_messages]:
-            # Add user message to chat history
-            st.session_state.chat_messages.append({
-                'message': chat_message,
-                'sender': 'user',
-                'timestamp': get_current_time()
-            })
-            
-            # Detect intent and respond
-            intent, category = detect_chat_intent(chat_message)
-            
-            if intent == "category" and category:
-                # Navigate to category deals
-                st.session_state.selected_action = "category"
-                st.session_state.selected_category = category
-                st.session_state.category_deals_state = 'results'
-                st.session_state.current_page = 0
-                
-                # Load category deals
-                deals_data = load_deals_data()
-                category_deals = deals_data.get(category, [])
-                st.session_state.category_deals = category_deals
-                
-                # Add bot response
-                st.session_state.chat_messages.append({
-                    'message': f"Here are the {category.title()} deals for you!",
-                    'sender': 'bot',
-                    'timestamp': get_current_time()
-                })
-                
-            elif intent == "location":
-                # Navigate to location deals
-                st.session_state.selected_action = "location"
-                st.session_state.location_deals_state = 'input'
-                st.session_state.current_page = 0
-                
-                # Add bot response
-                st.session_state.chat_messages.append({
-                    'message': "I'll help you find deals by location. Please enter your location or pincode.",
-                    'sender': 'bot',
-                    'timestamp': get_current_time()
-                })
-                
-            elif intent == "personalized":
-                # Navigate to personalized deals
-                st.session_state.selected_action = "personalized"
-                st.session_state.current_page = 0
-                
-                # Add bot response
-                st.session_state.chat_messages.append({
-                    'message': "Here are your personalized deals based on your preferences!",
-                    'sender': 'bot',
-                    'timestamp': get_current_time()
-                })
-                
-            else:
-                # No intent detected
-                st.session_state.chat_messages.append({
-                    'message': "I'm here to help you find deals! You can ask for travel deals, entertainment deals, food deals, or deals by location. What would you like to explore?",
-                    'sender': 'bot',
-                    'timestamp': get_current_time()
-                })
-            
-            st.rerun()
-    
     # Get current time for status bar
     current_time = get_current_time()
     
@@ -1079,12 +366,12 @@ def chat_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # Header with Fargo Deal Bot title and logout
+    # Header with title and logout
     col1, col2 = st.columns([4, 1])
     with col1:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); padding: 6px 15px; color: #3730a3; border-radius: 8px; border: 1px solid #c7d2fe; display: inline-block;">
-            <h6 style="margin: 0; color: #3730a3; font-size: 14px; font-weight: 600;">Fargo Deal Bot</h6>
+        <div style="max-width: 150px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 6px 15px; color: white; border-radius: 8px;">
+            <h6 style="margin: 0; color: white; font-size: 14px;">DealsBot</h6>
         </div>
         """, unsafe_allow_html=True)
     
@@ -1102,183 +389,122 @@ def chat_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # Chat messages display
-    if st.session_state.chat_messages:
-       # st.markdown("### 💬 Chat History")
-        for msg in st.session_state.chat_messages[-5:]:  # Show last 5 messages
-            if msg['sender'] == 'user':
-                st.markdown(f"""
-                <div style="background: #e3f2fd; padding: 8px 12px; border-radius: 8px; margin: 4px 0; border: 1px solid #bbdefb; text-align: right;">
-                    <div style="color: #1565c0; font-size: 12px; font-weight: 500;">{msg['message']}</div>
-                    <div style="color: #90a4ae; font-size: 10px;">{msg['timestamp']}</div>
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                <div style="background: #f3e5f5; padding: 8px 12px; border-radius: 8px; margin: 4px 0; border: 1px solid #e1bee7;">
-                    <div style="color: #7b1fa2; font-size: 12px; font-weight: 500;">{msg['message']}</div>
-                    <div style="color: #90a4ae; font-size: 10px;">{msg['timestamp']}</div>
-                </div>
-                """, unsafe_allow_html=True)
-    
-    # Create a container for the main content area with fixed height
-    with st.container():
-        # Check if we're in specific action mode
-        if st.session_state.get('selected_action') == 'location':
-            location_deals_page()
-        elif st.session_state.get('selected_action') == 'category':
-            category_deals_page()
-        elif st.session_state.get('selected_action') == 'personalized':
-            personalized_deals_page()
-        else:
-            # QRB Buttons - Single column, vertical stack, reduced height by 20%, left-aligned
-            st.markdown("""
-            <style>
-            .stButton > button {
-                height: 48px !important;
-                background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
-                color: #3730a3 !important;
-                border: none !important;
-                border-radius: 8px !important;
-                font-size: 14px !important;
-                font-weight: 600 !important;
-                text-transform: uppercase !important;
-                letter-spacing: 0.5px !important;
-                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2) !important;
-                transition: all 0.2s ease !important;
-                margin: 8px 0 !important;
-                width: 100% !important;
-                text-align: left !important;
-                padding-left: 20px !important;
-            }
-            .stButton > button:hover {
-                transform: translateY(-1px) !important;
-                box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
-                background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%) !important;
-            }
-            </style>
-            """, unsafe_allow_html=True)
-            
-            # Always show all QRB buttons with functionality
-            if st.button("🎯 Personalized Deals", key="personalized_btn"):
-                st.session_state.selected_action = "personalized"
-                st.session_state.current_page = 0
-                st.rerun()
-            
-            if st.button("📂 Deals by Category", key="category_btn"):
-                st.session_state.selected_action = "category"
-                st.session_state.current_page = 0
-                st.rerun()
-            
-            if st.button("📍 Deals by Location", key="location_btn"):
-                st.session_state.selected_action = "location"
-                st.session_state.current_page = 0
-                st.rerun()
-    
-    # Fixed chat input at absolute footer
+    # QRB Buttons - Single column, vertical stack, reduced height by 20%, left-aligned
     st.markdown("""
     <style>
-    .fixed-chat-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: white;
-        padding: 16px 20px;
-        border-top: 1px solid #e5e7eb;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .chat-input-wrapper {
-        max-width: 375px;
-        margin: 0 auto;
+    .stButton > button {
+        height: 48px !important;
+        padding: 12px 20px !important;
+        margin: 6px 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
     }
     </style>
     """, unsafe_allow_html=True)
     
-    # Add bottom padding to prevent content from being hidden behind fixed chat
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    if st.button("🎯 Deals by Category", key="category_btn"):
+        st.session_state.selected_action = "category"
+        st.rerun()
     
-    # Fixed chat input at absolute footer
-    st.markdown('<div class="fixed-chat-container">', unsafe_allow_html=True)
-    st.markdown('<div class="chat-input-wrapper">', unsafe_allow_html=True)
+    if st.button("🏪 Deals by Vendor", key="vendor_btn"):
+        st.session_state.selected_action = "vendor"
+        st.rerun()
     
-    # Chat input and send button
-    col1, col2 = st.columns([4, 1])
+    if st.button("💰 Deals by Amount", key="amount_btn"):
+        st.session_state.selected_action = "amount"
+        st.rerun()
+    
+    if st.button("📍 Deals by Location", key="location_btn"):
+        st.session_state.selected_action = "location"
+        st.rerun()
+    
+    # Chat input with integrated send button (ChatGPT style)
+    st.markdown("""
+    <style>
+    .chatgpt-input-container {
+        display: flex;
+        align-items: center;
+        margin: 24px 20px 16px 20px;
+        padding: 0;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+        min-height: 80px;
+        position: relative;
+    }
+    .chatgpt-input-box {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 20px 60px 20px 20px !important;
+        font-size: 16px !important;
+        flex: 1;
+        min-height: 80px;
+        resize: none;
+        font-family: inherit;
+    }
+    .chatgpt-input-box:focus {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    .send-btn-gpt {
+        position: absolute !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 20px !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        z-index: 10;
+    }
+    .send-btn-gpt:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+    }
+    .send-btn-gpt:active {
+        transform: scale(0.95) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Single chat input area with integrated send button (ChatGPT style)
+    col1, col2 = st.columns([6, 1])
     with col1:
-        chat_message = st.text_input("", placeholder="Type your message here...", key="chat_input_field", label_visibility="collapsed")
+        user_input = st.text_area("", placeholder="Type your message here...", key="chat_input", label_visibility="collapsed", height=80)
     with col2:
-        if st.button("➤", key="send_chat_btn", help="Send message"):
-            if chat_message and chat_message.strip():
-                # Add user message to chat history
-                '''
-                st.session_state.chat_messages.append({
-                    'message': chat_message.strip(),
-                    'sender': 'user',
-                    'timestamp': get_current_time()
-                })
-                '''
-                
-                # Detect intent and respond
-                intent, category = detect_chat_intent(chat_message.strip())
-                
-                if intent == "category" and category:
-                    # Navigate to category deals
-                    st.session_state.selected_action = "category"
-                    st.session_state.selected_category = category
-                    st.session_state.category_deals_state = 'results'
-                    st.session_state.current_page = 0
-                    
-                    # Load category deals
-                    deals_data = load_deals_data()
-                    category_deals = deals_data.get(category, [])
-                    st.session_state.category_deals = category_deals
-                    
-                    # Add bot response
-                    st.session_state.chat_messages.append({
-                        'message': f"Here are the {category.title()} deals for you!",
-                        'sender': 'bot',
-                        'timestamp': get_current_time()
-                    })
-                    
-                elif intent == "location":
-                    # Navigate to location deals
-                    st.session_state.selected_action = "location"
-                    st.session_state.location_deals_state = 'input'
-                    st.session_state.current_page = 0
-                    
-                    # Add bot response
-                    st.session_state.chat_messages.append({
-                        'message': "I'll help you find deals by location. Please enter your location or pincode.",
-                        'sender': 'bot',
-                        'timestamp': get_current_time()
-                    })
-                    
-                elif intent == "personalized":
-                    # Navigate to personalized deals
-                    st.session_state.selected_action = "personalized"
-                    st.session_state.current_page = 0
-                    
-                    # Add bot response
-                    st.session_state.chat_messages.append({
-                        'message': "Here are your personalized deals based on your preferences!",
-                        'sender': 'bot',
-                        'timestamp': get_current_time()
-                    })
-                    
-                else:
-                    # No intent detected
-                    st.session_state.chat_messages.append({
-                        'message': "I'm here to help you find deals! You can ask for travel deals, entertainment deals, food deals, or deals by location. What would you like to explore?",
-                        'sender': 'bot',
-                        'timestamp': get_current_time()
-                    })
-                
+        if st.button("➤", key="send_btn", help="Send message"):
+            if user_input and user_input.strip():
+                # Handle chat input here
+                st.success(f"You said: {user_input}")
+                st.session_state.chat_input = ""
                 st.rerun()
     
-    st.markdown('</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Add custom CSS to position send button inside text area
+    st.markdown("""
+    <script>
+    // Position send button inside text area
+    const textArea = document.querySelector('textarea[data-testid="stTextArea"]');
+    const sendBtn = document.querySelector('button[data-testid="stButton"]');
+    if (textArea && sendBtn) {
+        textArea.style.position = 'relative';
+        sendBtn.style.position = 'absolute';
+        sendBtn.style.right = '12px';
+        sendBtn.style.bottom = '12px';
+        sendBtn.style.zIndex = '10';
+    }
+    </script>
+    """, unsafe_allow_html=True)
 
 def main():
     """Main application function"""
@@ -1289,10 +515,6 @@ def main():
         st.session_state.user = None
     if 'selected_action' not in st.session_state:
         st.session_state.selected_action = None
-    if 'current_page' not in st.session_state:
-        st.session_state.current_page = 0
-    
-
     
     # Show appropriate page based on login status
     if not st.session_state.logged_in:
